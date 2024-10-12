@@ -18,6 +18,10 @@ components:
         amount:
           type: number
           description: "Booking amount"
+    ArrayOfBooking:
+      type: array
+      items:
+        $ref: "#components/schemas/Booking"
 paths:
   /bookings/create:
     post:
@@ -38,3 +42,34 @@ paths:
                 $ref: "#components/schemas/Booking"
         "400":
           description: "Bad request invalid booking details"
+  /bookings/all:
+    get:
+      tags:
+        - bookings
+      summary: Get all bookings
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfBooking"
+        "400":
+          description: Bad request. Invalid Booking Details
+  /bookings/{id}/find:
+    get:
+      tags:
+        - bookings
+      summary: Get single booking
+      parameters:
+        - in: path
+          name: id
+          required: true
+      responses:
+        "200":
+          description: Fetched booking successfully
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Booking"
+        "400":
+          description: Could not find booking
