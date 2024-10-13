@@ -83,7 +83,7 @@ paths:
     put:
       tags:
         - bookings
-      summary: Update booking details
+      summary: update single booking
       parameters:
         - in: path
           name: id
@@ -95,28 +95,26 @@ paths:
               $ref: "#components/schemas/Booking"
       responses:
         "200":
-          description: booking updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#components/schemas/Booking"
+          description: updated booking successfully
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Booking"
         "400":
-          description: "Bad request invalid booking details"
+          description: Could not find booking
   /bookings/{id}/delete:
     delete:
       tags:
         - bookings
-      summary: delete booking details
+      summary: delete single booking
       parameters:
         - in: path
           name: id
           required: true
       responses:
         "200":
-          description: booking updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#components/schemas/Booking"
+          description: deleted booking successfully
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Booking"
         "400":
-          description: "Bad request invalid booking details"
+          description: Could not find booking
