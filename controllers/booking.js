@@ -19,7 +19,7 @@ module.exports = {
     },
     deleteBooking(req, res) {
         const bookingIndex = bookings.findIndex(booking => booking.id == req.params.id);
-        bookings.splice(bookingIndex);
+        bookings.splice(bookingIndex, 1);
         return res.json({ booking: bookings });
     }
 }

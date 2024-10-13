@@ -5,6 +5,10 @@ info:
 servers:
   - url: http://localhost:3000
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
   schemas:
     Booking:
       type: object
@@ -27,6 +31,8 @@ paths:
     post:
       tags:
         - bookings
+      security:
+        - bearerAuth: []
       summary: Create new booking
       requestBody:
         content:
@@ -73,3 +79,44 @@ paths:
               $ref: "#/components/schemas/Booking"
         "400":
           description: Could not find booking
+  /bookings/{id}/update:
+    put:
+      tags:
+        - bookings
+      summary: Update booking details
+      parameters:
+        - in: path
+          name: id
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/Booking"
+      responses:
+        "200":
+          description: booking updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Booking"
+        "400":
+          description: "Bad request invalid booking details"
+  /bookings/{id}/delete:
+    delete:
+      tags:
+        - bookings
+      summary: delete booking details
+      parameters:
+        - in: path
+          name: id
+          required: true
+      responses:
+        "200":
+          description: booking updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Booking"
+        "400":
+          description: "Bad request invalid booking details"
